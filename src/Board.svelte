@@ -2,10 +2,13 @@
     import Square from './Square.svelte';
 
     let status = 'Next player: X';
+
+    let squares = Array(9).fill(null);
+    function handleClick(i) {
+        squares[i] = 'X'
+    }
 </script>
 <style>
-
-
     .board-row:after {
         clear: both;
         content: "";
@@ -21,18 +24,19 @@
 <div class="game-board">
     <div class="status">{status}</div>
     <div class="board-row">
-        <Square value={0} />
-        <Square value={1} />
-        <Square value={2} />
+        {#each [0, 1, 2] as i}
+            <Square value={squares[i]} handleClick={() => handleClick(i)}
+            />
+        {/each}
     </div>
     <div class="board-row">
-        <Square value={3} />
-        <Square value={4} />
-        <Square value={5} />
+        {#each [3, 4, 5] as i}
+            <Square value={squares[i]} handleClick={() => handleClick(i)} />
+        {/each}
     </div>
     <div class="board-row">
-        <Square value={6} />
-        <Square value={7} />
-        <Square value={8} />
+        {#each [6, 7, 8] as i}
+            <Square value={squares[i]} handleClick={() => handleClick(i)} />
+        {/each}
     </div>
 </div>
